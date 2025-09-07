@@ -4,7 +4,7 @@ async function sendToWechat(url, textcontent) {
   const payload = {
     msgtype: "text",
     text: {
-        "content": textcontent
+        content: textcontent
     }
   };
 
@@ -23,7 +23,7 @@ async function sendToWechat(url, textcontent) {
 
 export default {
   async email(message, env) {
-    const parser = new PostalMime();
+    const parser = new PostalMime.default();
     const email = await parser.parse(message.raw);
     
     const textcontent = `新邮件\n主题: ${email.subject || '无主题'}\n\n${email.text || '无正文内容'}`;
@@ -31,4 +31,5 @@ export default {
   }
 
 };
+
 
