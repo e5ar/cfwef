@@ -24,12 +24,14 @@ async function sendToWechat(url, textcontent) {
 export default {
   async email(message, env) {
     const parser = new PostalMime.default();
-    const email = await parser.parse(message.raw);
+    const rawEmail = new Response(message.raw);
+    const email = await parser.parse(await rawEmail.arrayBuffer());
     
     const textcontent = `新邮件\n主题: ${email.subject || '无主题'}\n\n${email.text || '无正文内容'}`;
     await sendToWechat(env.WEBHOOK_URL, textcontent);
   }
 
 };
+
 
 
