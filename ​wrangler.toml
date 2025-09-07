@@ -1,0 +1,9 @@
+name = "email-forwarder"
+compatibility_date = "2024-05-15"
+main = "src/index.js"
+
+[email]
+route = "*"  # 处理所有收到的邮件
+
+[vars]
+WEBHOOK_URL = "@@WEBHOOK_URL@@"  # 占位符，实际值通过环境变量设置
