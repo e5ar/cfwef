@@ -1,4 +1,4 @@
-import { PostalMime } from 'postal-mime';
+import * as PostalMime from 'postal-mime';
 
 async function sendToWechat(url, textcontent) {
   const payload = {
@@ -31,3 +31,4 @@ export default {
   }
 
 };
+
