@@ -1,9 +1,11 @@
 import { PostalMime } from 'postal-mime';
 
-async function sendToWechat(url, content) {
+async function sendToWechat(url, textcontent) {
   const payload = {
     msgtype: "text",
-    text: { content }
+    text: {
+        "content": textcontent
+    }
   };
 
   for (let attempt = 0; attempt < 3; attempt++) {
@@ -24,7 +26,8 @@ export default {
     const parser = new PostalMime();
     const email = await parser.parse(message.raw);
     
-    const content = `新邮件\n主题: ${email.subject || '无主题'}\n\n${email.text || '无正文内容'}`;
-    await sendToWechat(env.WEBHOOK_URL, content);
+    const textcontent = `新邮件\n主题: ${email.subject || '无主题'}\n\n${email.text || '无正文内容'}`;
+    await sendToWechat(env.WEBHOOK_URL, textcontent);
   }
+
 };
